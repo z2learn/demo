@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template_string
 from rembg import remove
+from asgiref.wsgi import WsgiToAsgi
 from PIL import Image
 import io
 import os
@@ -183,4 +184,4 @@ def remove_background():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    asgi_app = WsgiToAsgi(app)
